@@ -1,15 +1,15 @@
-service: serverless-parameter-store
-
-custom:
-  settings:
-    SECRET_VALUE: ${ssm:serverless-parameter-store-secret-value}
+service: middy-parameter-test
 
 provider:
   name: aws
-  runtime: nodejs6.10
+  runtime: nodejs8.10
   profile: default
-  region: eu-west-1
-  environment: ${self:custom.settings}
+  region: us-east-1
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action: ssm:GetParameters*
+      Resource: arn:aws:ssm:us-east-1:*:parameter/middy-test/value1
 
 functions:
   hello:

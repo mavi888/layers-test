@@ -2,12 +2,15 @@
 
 const middy = require('middy');
 const { ssm } = require('middy/middlewares');
+const uuidv1 = require('uuid/v1');
 
 const originalHandler = (event, context, callback) => {
 	const response = {
 		statusCode: 200,
 		body: JSON.stringify({
-			secretValue: context.value1
+			uuid: uuidv1(),
+			secretValue: context.value1,
+			message: 'change this thing'
 		})
 	};
 
